@@ -1,0 +1,21 @@
+.title {
+  font-size: 35px;
+  margin-top: 15px;
+  margin-bottom: 15px;
+}
+.title-enter-active {
+  animation: task 800ms ease-in alternate-reverse;
+}
+@keyframes task {
+  0% {
+    transform: translateX(0);
+  }
+  30% {
+    opacity: 0.7;
+    transform: translateX(30px);
+  }
+  100% {
+    opacity: 0;
+    transform: translateX(-200px);
+  }
+}

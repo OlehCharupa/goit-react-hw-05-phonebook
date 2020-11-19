@@ -21,6 +21,9 @@ class ContactForm extends Component {
     submitHendler = (e) => {
         const { name, number } = this.state
         e.preventDefault();
+        if (!name || !number) {
+            return
+        }
         const singleContact = {
             name,
             number,

@@ -31,11 +31,8 @@ class PhoneBooks extends Component {
     }
     addContact = (objContact) => {
         const exist = this.state.contacts.some(contact => contact.name === objContact.name)
-        // console.log(this.state.alert);
         exist
-            ?
-            // alert(`Контакт с именем ${objContact.name} уже существует!`)
-            this.setState({ alert: exist })
+            ? this.setState({ alert: exist })
             : this.setState((prev) => ({
                 contacts: [...prev.contacts, {
                     ...objContact, id: uuidv4()
@@ -54,31 +51,49 @@ class PhoneBooks extends Component {
     stateFilter = (e) => {
         this.setState({ filter: e.target.value })
     }
-
+    closeAlert = () => {
+        this.setState({ alert: false })
+    }
 
     render() {
         return (
             <>
-                { this.state.alert
-                    ? <CSSTransition classNames="alertBox" mountOnEnter timeout={800} in={this.state.alert}>
-                        <div className="alertBox"><h2>{`Контакт с таким именем  уже существует!`}</h2></div>
-                    </CSSTransition>
-                    : ""}
+
+                <TransitionGroup className="alertBox" component="div">
+                    {this.state.alert
+                        ?
+                        <CSSTransition classNames="alert__Box" mountOnEnter unmountOnExit timeout={800} >
+                            <div className="alert__Box">
+                                <h2>{`Контакт с таким именем  уже существует!`}</h2>
+                                <button onClick={this.closeAlert} className="alertButton">ok</button>
+                            </div>
+                        </CSSTransition>
+                        : null}
+                </TransitionGroup>
+
                 <CSSTransition classNames="title" mountOnEnter timeout={800} in={this.state.start}>
                     <h1 className="title">Phonebook</h1>
                 </CSSTransition>
                 <ContactForm addContact={this.addContact} />
-                <Filter stateFilter={this.stateFilter} filter={this.state.filter} />
+                { this.state.contacts.length >= 2
+                    ? <Filter stateFilter={this.stateFilter} filter={this.state.filter} contacts={this.state.contacts} />
+                    : null}
                 <h2 className="subTitle">Contacts</h2>
                 <TransitionGroup className="contactList" component="ul">
-                    {this.filterName().map(contact =>
-                        <CSSTransition key={contact.id} classNames="list__item" timeout={800}>
-                            <ContactList
-                                {...contact}
-                                deleteContact={this.deleteContact} />
-                        </CSSTransition>)}
+                    {this.filterName().length >= 1
+                        ? this.filterName().map(contact =>
+                            <CSSTransition key={contact.id} classNames="list__item" timeout={800}>
+                                <ContactList
+                                    {...contact}
+                                    deleteContact={this.deleteContact} />
+                            </CSSTransition>)
+                        : this.state.contacts.map(contact =>
+                            <CSSTransition key={contact.id} classNames="list__item" timeout={800}>
+                                <ContactList
+                                    {...contact}
+                                    deleteContact={this.deleteContact} />
+                            </CSSTransition>)}
                 </TransitionGroup>
-
             </>
         );
     }

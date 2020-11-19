@@ -3,8 +3,7 @@
   margin-top: 15px;
   margin-bottom: 15px;
 }
-.title-enter-active,
-.alertBox-enter-active {
+.title-enter-active {
   animation: task 800ms ease-in alternate-reverse;
 }
 @keyframes task {
@@ -20,60 +19,54 @@
     transform: translateX(-200px);
   }
 }
-.alertBox {
+.alert__Box {
   position: absolute;
-  top: 15px;
+  top: 25px;
   right: 50%;
   background-color: red;
   color: white;
   padding: 10px;
+  text-align: center;
+  width: 350px;
+  transform: translateX(50%);
+  border-radius: 20px;
 }
-/* .alertBox-enter {
-  opacity: 0;
-} */
-/* .alertBox-enter-activ {
-  animation: task 800ms ease-in alternate-reverse;
-} */
-/* .alertBox-exit {
-  opacity: 1;
-} */
-/* .alertBox-exit-active {
-  animation-duration: 800ms;
-  animation-name: hinge;
-} */
-/* @keyframes task {
+.alertButton {
+  margin: 0 auto;
+  padding: 5px 10px;
+  border: none;
+  border-radius: 10px;
+}
+.alert__Box-enter-active {
+  animation: alert 800ms ease-in alternate-reverse;
+}
+@keyframes alert {
   0% {
-    transform: translateX(0);
+    transform: translateX(50%);
   }
   30% {
     opacity: 0.7;
-    transform: translateX(30px);
+    transform: translateX(50%);
   }
   100% {
     opacity: 0;
-    transform: translateX(-200px);
+    transform: translateX(-10%);
   }
-} */
-/* @keyframes hinge {
+}
+
+.alert__Box-exit-active {
+  animation: alertBack 800ms ease-in-out;
+}
+@keyframes alertBack {
   0% {
-    transform-origin: top left;
-    animation-timing-function: ease-in-out;
+    transform: translateX(50%);
   }
-  20%,
-  60% {
-    transform: rotate3d(0, 0, 1, 80deg);
-    transform-origin: top left;
-    animation-timing-function: ease-in-out;
-  }
-  40%,
-  80% {
-    transform: rotate3d(0, 0, 1, 60deg);
-    transform-origin: top left;
-    animation-timing-function: ease-in-out;
+  30% {
     opacity: 1;
+    transform: translateX(50%);
   }
-  to {
-    transform: translate3d(0, 700px, 0);
-    opacity: 0;
+  100% {
+    opacity: 0.3;
+    transform: translateX(-10%);
   }
-} */
+}

@@ -11,7 +11,6 @@ class PhoneBooks extends Component {
     state = {
         contacts: [],
         filter: '',
-        start: false,
         alert: false
     }
 
@@ -22,7 +21,6 @@ class PhoneBooks extends Component {
                 contacts: JSON.parse(perContacts)
             })
         }
-        this.setState({ start: true })
     }
     componentDidUpdate(prevProp, prevState) {
         if (prevState.contacts !== this.state.contacts) {
@@ -71,14 +69,18 @@ class PhoneBooks extends Component {
                         : null}
                 </TransitionGroup>
 
-                <CSSTransition classNames="title" mountOnEnter timeout={800} in={this.state.start}>
+                <CSSTransition classNames="title" timeout={1000} in={true} appear={true}>
                     <h1 className="title">Phonebook</h1>
                 </CSSTransition>
+
                 <ContactForm addContact={this.addContact} />
+
                 { this.state.contacts.length >= 2
                     ? <Filter stateFilter={this.stateFilter} filter={this.state.filter} contacts={this.state.contacts} />
                     : null}
+
                 <h2 className="subTitle">Contacts</h2>
+
                 <TransitionGroup className="contactList" component="ul">
                     {this.filterName().length >= 1
                         ? this.filterName().map(contact =>

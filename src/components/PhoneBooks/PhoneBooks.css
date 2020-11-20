@@ -3,22 +3,14 @@
   margin-top: 15px;
   margin-bottom: 15px;
 }
-.title-enter-active {
-  animation: task 800ms ease-in alternate-reverse;
+.title-appear {
+  transform: translateY(-200%);
 }
-@keyframes task {
-  0% {
-    transform: translateX(0);
-  }
-  30% {
-    opacity: 0.7;
-    transform: translateX(30px);
-  }
-  100% {
-    opacity: 0;
-    transform: translateX(-200px);
-  }
+.title-appear-active {
+  transform: translateY(0);
+  transition: transform 1000ms ease-in;
 }
+
 .alert__Box {
   position: absolute;
   top: 25px;
